@@ -35,6 +35,8 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     netrc (0.11.0)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -63,6 +65,12 @@ GEM
       omniauth-oauth2 (>= 1.6)
       rest-client (~> 2.0.2)
     ruby2_keywords (0.0.5)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    tilt (2.0.10)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7-x64-mingw32)
@@ -71,7 +79,9 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  omniauth
   rspotify
+  sinatra
 
 BUNDLED WITH
    2.1.4
