@@ -1,9 +1,23 @@
 # Spotify API Sample
 ## Install
-```
+```.
 $ git checkout https://github.com/ongaeshi/spotify-api-sample.git
 $ cd spotify-api-sample
 $ bundle install
+```
+
+## Add credentials to .config.yml
+```
+$ cp .config.yml.sample .config.yaml
+$ code .config.yml
+```
+
+Get your credentials [here](https://developer.spotify.com/my-applications). 
+Write to `.config.yml`
+
+```
+client_id: "xxxxx"
+client_secret: "yyyyy"
 ```
 
 ## Find artists
