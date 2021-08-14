@@ -8,8 +8,6 @@ ARGV.each do |query|
   artists = RSpotify::Artist.search(query)
 
   artists.each do |artist|
-    # p artist
-    # p artist.top_tracks(:JP)
-    puts "#{artist.name} #{artist.popularity} #{artist.external_urls["spotify"]}"
+    puts "#{artist.name} #{artist.popularity} #{artist.top_tracks(:JP)[0]&.name} #{artist.external_urls["spotify"]}"
   end
 end
