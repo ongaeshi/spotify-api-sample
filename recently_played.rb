@@ -12,7 +12,7 @@ class MyApplication < Sinatra::Base
   use Rack::Session::Cookie
 
   use OmniAuth::Builder do
-    provider :spotify, $data["client_id"], $data["client_secret"], scope: "user-read-email playlist-modify-public user-library-read user-library-modify"
+    provider :spotify, $data["client_id"], $data["client_secret"], scope: "user-read-recently-played"
   end
 
   get "/" do
@@ -20,13 +20,12 @@ class MyApplication < Sinatra::Base
   end
 
   get "/auth/:provider/callback" do
-    spotify_user = RSpotify::User.new(request.env["omniauth.auth"])
-    # Now you can access user's private data, create playlists and much more
+    user = RSpotify::User.new(request.env["omniauth.auth"])
+    recently_played = user.recently_played
 
-    result = request.env["omniauth.auth"]
     erb "<a href='/'>Top</a><br>
-         <h1>#{params[:provider]}</h1>
-         <pre>#{JSON.pretty_generate(result)}</pre>"
+         <h1>Spotify recently played</h1>
+         <pre>#{recently_played.map { |e| track_str(e)}.join("\n")}</pre>"
   end
 end
 
