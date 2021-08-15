@@ -18,8 +18,9 @@ def track_str(track)
 end
 
 def track_html(track)
+  image_url = track.album.images[2]["url"]
   artist = track.artists[0]
-  "#{track.name} - #{artist.name} #{ms_to_time(track.duration_ms)} #{track.popularity} #{track.external_urls["spotify"]}"
+  "<img src='#{image_url}' /> <a href='#{track.external_urls["spotify"]}'>#{track.name}</a> #{artist.name} #{ms_to_time(track.duration_ms)}"
 end
 
 def ms_to_time(ms)
