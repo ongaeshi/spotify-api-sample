@@ -17,6 +17,11 @@ def track_str(track)
   "#{track.name} - #{artist.name} #{ms_to_time(track.duration_ms)} #{track.popularity} #{track.external_urls["spotify"]}"
 end
 
+def track_html(track)
+  artist = track.artists[0]
+  "#{track.name} - #{artist.name} #{ms_to_time(track.duration_ms)} #{track.popularity} #{track.external_urls["spotify"]}"
+end
+
 def ms_to_time(ms)
   sec = ms / 1000
   day = sec.to_i / 86400
