@@ -5,6 +5,7 @@ require "time"
 def authenticate_from_config_yml
   data = YAML.safe_load(File.read(".config.yml"))
   RSpotify.authenticate(data["client_id"], data["client_secret"])
+  data
 end
 
 def artist_str(artist)
