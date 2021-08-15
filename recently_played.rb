@@ -21,7 +21,7 @@ class MyApplication < Sinatra::Base
 
   get "/auth/:provider/callback" do
     user = RSpotify::User.new(request.env["omniauth.auth"])
-    recently_played = user.recently_played
+    recently_played = user.recently_played(limit: 50)
 
     erb "<a href='/'>Top</a><br>
          <h1>Spotify recently played</h1>
