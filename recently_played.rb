@@ -4,6 +4,8 @@ require "rspotify"
 require "rspotify/oauth"
 require "util"
 
+OmniAuth.config.allowed_request_methods = [:post, :get]
+
 $data = authenticate_from_config_yml
 
 class MyApplication < Sinatra::Base
