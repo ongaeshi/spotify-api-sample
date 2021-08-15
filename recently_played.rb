@@ -10,7 +10,6 @@ $data = authenticate_from_config_yml
 
 class MyApplication < Sinatra::Base
   use Rack::Session::Cookie
-  use OmniAuth::Strategies::Spotify
 
   use OmniAuth::Builder do
     provider :spotify, $data["client_id"], $data["client_secret"], scope: "user-read-email playlist-modify-public user-library-read user-library-modify"
