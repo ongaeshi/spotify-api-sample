@@ -15,7 +15,7 @@ class MyApplication < Sinatra::Base
   end
 
   use OmniAuth::Builder do
-    provider :spotify, $data["client_id"], $data["client_secret"], scope: "user-read-recently-played"
+    provider :spotify, $data["client_id"], $data["client_secret"], scope: "user-read-recently-played user-modify-playback-state user-read-playback-state"
   end
 
   get "/" do
@@ -43,7 +43,8 @@ class MyApplication < Sinatra::Base
     if session[:authenticated]
       user = RSpotify::User.new(session[:omniauth_auth])
       player = user.player
-      player.queue(params["uri"])
+      p "Queue #{params["uri"]} (not implement)"
+      # player.queue(params["uri"])
     end
 
     redirect "/"
