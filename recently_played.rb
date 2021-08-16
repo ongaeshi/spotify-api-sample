@@ -39,6 +39,16 @@ class MyApplication < Sinatra::Base
     redirect "/"
   end
 
+  get "/queue/:uri" do
+    if session[:authenticated]
+      user = RSpotify::User.new(session[:omniauth_auth])
+      player = user.player
+      player.queue(params["uri"])
+    end
+
+    redirect "/"
+  end
+
   get "/logout" do
     session[:authenticated] = false
     redirect "/"
@@ -46,9 +56,10 @@ class MyApplication < Sinatra::Base
 
   def recently_played_html(recently_played)
     body = recently_played.map do |track|
-      "<li>#{track_html(track)}</li>"
+      queue_link = "<a href='/queue/#{track.uri}'>➕</a>"
+      "<li>#{track_html(track)} #{queue_link}</li>"
     end.join("\n")
-    
+
     <<~EOS
       <ol>
         #{body}
