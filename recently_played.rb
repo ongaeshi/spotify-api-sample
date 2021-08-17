@@ -4,8 +4,6 @@ require "rspotify"
 require "rspotify/oauth"
 require "util"
 
-OmniAuth.config.allowed_request_methods = [:post, :get]
-
 $data = authenticate_from_config_yml
 
 class MyApplication < Sinatra::Base
@@ -28,7 +26,12 @@ class MyApplication < Sinatra::Base
         <a href="/logout">Logout</a><br>
       EOS
     else
-      erb "<a href='/auth/spotify'>Login with Spotify</a><br>"
+      erb <<~EOS
+        <form method='post' action='/auth/spotify'>
+          <input type="hidden" name="authenticity_token" value='#{request.env["rack.session"]["csrf"]}'>
+          <button type='submit'>Login with Spotify</button>
+        </form>
+      EOS
     end
   end
 
