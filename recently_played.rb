@@ -24,7 +24,6 @@ class MyApplication < Sinatra::Base
       recently_played = user.recently_played(limit: 50)
 
       erb <<~EOS
-        <h1>Spotify recently played</h1>
         #{recently_played_html(recently_played)}
         <a href="/logout">Logout</a><br>
       EOS
@@ -58,3 +57,12 @@ class MyApplication < Sinatra::Base
 end
 
 MyApplication.run! if __FILE__ == $0
+
+
+__END__
+
+@@ layout
+<html>
+  <h1>Spotify recently played</h1>
+  <%= yield %>
+</html>
